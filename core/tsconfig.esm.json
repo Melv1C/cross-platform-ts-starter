@@ -1,0 +1,12 @@
+// core/tsconfig.esm.json
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ESNext",          // keep import/exports
+    "declaration": true,         // emit .d.ts
+    "declarationMap": true,
+    "rootDir": "src",
+    "outDir": "dist/esm"
+  },
+  "include": ["src"]
+}

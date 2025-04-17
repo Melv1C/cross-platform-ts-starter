@@ -1,0 +1,13 @@
+// tsconfig.base.json
+{
+  "compilerOptions": {
+    "target": "ES2020",                          // modern JS features
+    "moduleResolution": "node",                  // Node-style resolution
+    "strict": true,                              // all strict checks
+    "esModuleInterop": true,                     // allow default imports from CJS
+    "forceConsistentCasingInFileNames": true,    // avoid case-sensitivity bugs
+    "skipLibCheck": true,                        // faster builds, skip declaration checks
+    "resolveJsonModule": true,                   // import .json files
+    "sourceMap": true                            // generate sourcemaps
+  }
+}

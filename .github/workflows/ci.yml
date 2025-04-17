@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-core:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: core/package-lock.json
+
+      - name: Install dependencies
+        run: cd core && npm ci
+
+      - name: Build
+        run: cd core && npm run build
+
+      - name: Test
+        run: cd core && npm test
+
+  test:
+    needs: build-core
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        project: [backend, web, mobile, desktop]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: ${{ matrix.project }}/package-lock.json
+
+      - name: Install dependencies
+        run: cd ${{ matrix.project }} && npm ci
+
+      - name: Build
+        run: cd ${{ matrix.project }} && npm run build --if-present
+
+      - name: Test
+        run: cd ${{ matrix.project }} && npm test --if-present

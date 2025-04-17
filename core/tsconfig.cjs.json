@@ -1,0 +1,8 @@
+// core/tsconfig.cjs.json
+{
+  "extends": "./tsconfig.esm.json",
+  "compilerOptions": {
+    "module": "CommonJS",        // transpile to require()
+    "outDir": "dist/cjs"
+  }
+}

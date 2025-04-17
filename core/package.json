@@ -1,0 +1,39 @@
+{
+  "name": "@cross-platform-ts-starter/core",
+  "version": "1.0.0",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build": "npm run build:esm && npm run build:cjs",
+    "dev:esm": "tsc -p tsconfig.esm.json --watch",
+    "dev:cjs": "tsc -p tsconfig.cjs.json --watch",
+    "dev": "concurrently \"npm run dev:esm\" \"npm run dev:cjs\"",
+    "clean": "rimraf dist",
+    "lint": "eslint src --ext .ts",
+    "test": "jest"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "axios": "^1.8.4",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.27.0",
+    "@types/node": "^22.14.1",
+    "concurrently": "^9.1.2",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
